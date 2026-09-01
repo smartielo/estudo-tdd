@@ -2,7 +2,7 @@ def calcular_ingresso(idade, estudante):
     preco_padrao = 30
     if idade <= 0:
         raise ValueError("A idade deve ser maior que 1.")
-    if 12 <= idade <= 60 or estudante == True:
+    if idade < 12 or idade >= 60 or estudante:
         ingresso = preco_padrao / 2
     else:
         ingresso = preco_padrao
@@ -21,4 +21,8 @@ def comprar_lanche(tipo_lanche):
     return valor_lanche
 
 def fechar_pedido(idade, estudante, tipo_lanche=None):
-    ...
+    ingresso = calcular_ingresso(idade, estudante)
+    if tipo_lanche is not None:
+        lanche = comprar_lanche(tipo_lanche)
+        return ingresso + lanche
+    return ingresso
